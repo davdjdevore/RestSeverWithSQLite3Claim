@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>ClaimsDao.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ClaimsDao.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">david.devore.hw1.Dao.Claims</span>
+
+<span class="s1">import com.sun.org.apache.xpath.internal.operations.Bool</span>
+<span class="s1">import java.lang.Boolean.FALSE</span>
+<span class="s1">import java.util.*</span>
+
+<span class="s0">class </span><span class="s1">ClaimsDao : Dao(){</span>
+
+    <span class="s0">fun </span><span class="s1">getAll() : List&lt;Claims&gt; {</span>
+        <span class="s2">// 1. Get db connection</span>
+        <span class="s0">val </span><span class="s1">conn = Database.getInstance()?.getDbConnection()</span>
+
+        <span class="s2">// 2. prepare the sql statement</span>
+        <span class="s1">sqlStmt = </span><span class="s3">&quot;select Title, Date, isSolved &quot;</span>
+
+        <span class="s2">// 3. submit the sql statement</span>
+        <span class="s0">var </span><span class="s1">cList : MutableList&lt;Claims&gt; = mutableListOf()</span>
+        <span class="s0">val </span><span class="s1">st = conn?.prepare(sqlStmt)</span>
+
+        <span class="s2">// 4. Convert into Kotlin object format</span>
+        <span class="s0">while </span><span class="s1">(st?.step()!!) {</span>
+            <span class="s0">val </span><span class="s1">id = UUID.randomUUID()</span>
+            <span class="s0">val </span><span class="s1">title = st.columnString(</span><span class="s4">0</span><span class="s1">)</span>
+            <span class="s0">val </span><span class="s1">date = st.columnString(</span><span class="s4">1</span><span class="s1">)</span>
+            <span class="s0">val </span><span class="s1">isSolved = FALSE</span>
+            <span class="s1">cList.add(Claims(id</span><span class="s0">, </span><span class="s1">title</span><span class="s0">, </span><span class="s1">date</span><span class="s0">, </span><span class="s1">isSolved))</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">cList</span>
+    <span class="s1">}</span>
+
+<span class="s1">}</span></pre>
+</body>
+</html>

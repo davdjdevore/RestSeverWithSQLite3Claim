@@ -1,6 +1,6 @@
 // 893845891
 // David Devore
-// Problem 3
+// Homework 1
 
 package org.csuf.cspc411
 
